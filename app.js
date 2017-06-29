@@ -14,6 +14,7 @@ const app = {
 
   renderListItem(flick) {
     const item = document.createElement('li')
+    item.dataset.id = flick.id
     item.textContent = flick.name
     item.style.backgroundColor = "white"
 
@@ -76,10 +77,12 @@ const app = {
       id: this.max + 1,
       name: f.flickName.value,
     }
+    this.flicks.push(flick)
 
     const listItem = this.renderListItem(flick)
     this.list.appendChild(listItem)
-    this.flicks[flick.id - 1] = flick.Name
+
+    //this.flicks[flick.id - 1] = flick.Name
     this.max ++
 
     //resets the form--when you hit submit the text in the input goes away
