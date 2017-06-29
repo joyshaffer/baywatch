@@ -20,22 +20,40 @@ const app = {
     //create buttons
     const favButton = document.createElement('button')
     const delButton = document.createElement('button')
-    favButton.textContent = 'fav'
-    delButton.textContent = 'delete'
+    const upButton = document.createElement('button')
+    const downButton = document.createElement('button')
+    favButton.textContent = 'Fav'
+    delButton.textContent = 'Delete'
+    upButton.textContent = 'Up'
+    downButton.textContent = 'Down'
 
     //style fav button
     favButton.style.backgroundColor = 'dodgerblue'
     favButton.style.position = 'absolute'
-    favButton.style.right = '230px'
-    favButton.style.height = '25px'
+    favButton.style.right = '400px'
+    favButton.style.height = '40px'
     favButton.style.width = '60px'
 
     //style del button
     delButton.style.backgroundColor = 'red'
     delButton.style.position = 'absolute'    
-    delButton.style.right = '290px'
-    delButton.style.height = '25px'
+    delButton.style.right = '340px'
+    delButton.style.height = '40px'
     delButton.style.width = '60px'
+
+    //style up button
+    upButton.style.backgroundColor = 'Chartreuse'
+    upButton.style.position = 'absolute'    
+    upButton.style.right = '280px'
+    upButton.style.height = '40px'
+    upButton.style.width = '60px'
+
+    //style down button
+    downButton.style.backgroundColor = 'greenyellow'
+    downButton.style.position = 'absolute'    
+    downButton.style.right = '220px'
+    downButton.style.height = '40px'
+    downButton.style.width = '60px'
 
     favButton.addEventListener('click', ()=>{
         if(item.style.backgroundColor == 'white') {
@@ -45,6 +63,9 @@ const app = {
 
     item.appendChild(favButton)
     item.appendChild(delButton)
+    item.appendChild(upButton)
+    item.appendChild(downButton)
+
     return item
   },
 
@@ -60,6 +81,9 @@ const app = {
     this.list.appendChild(listItem)
     this.flicks[flick.id - 1] = flick.Name
     this.max ++
+
+    //resets the form--when you hit submit the text in the input goes away
+    f.reset()
   }
 }
 
