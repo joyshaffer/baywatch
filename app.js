@@ -15,31 +15,34 @@ const app = {
   renderListItem(flick) {
     const item = document.createElement('li')
     item.textContent = flick.name
-    item.style.backgroundColor = "lightgrey"
+    item.style.backgroundColor = "white"
+
+    //create buttons
     const favButton = document.createElement('button')
     const delButton = document.createElement('button')
-    //favButton.getAttribute('id', 'f$(flick.id)')
-    //favButton.getAttribute('id', 'f$(flick.id)')
     favButton.textContent = 'fav'
     delButton.textContent = 'delete'
-    favButton.style.backgroundColor = 'red'
-    delButton.style.backgroundColor = 'yellow'
+
+    //style fav button
+    favButton.style.backgroundColor = 'dodgerblue'
     favButton.style.position = 'absolute'
-    delButton.style.position = 'absolute'
     favButton.style.right = '230px'
-    delButton.style.right = '290px'
     favButton.style.height = '25px'
     favButton.style.width = '60px'
+
+    //style del button
+    delButton.style.backgroundColor = 'red'
+    delButton.style.position = 'absolute'    
+    delButton.style.right = '290px'
     delButton.style.height = '25px'
     delButton.style.width = '60px'
+
     favButton.addEventListener('click', ()=>{
-        if(item.style.backgroundColor == 'lightgrey') {
-            item.style.backgroundColor = 'gold'}
-            else{item.style.backgroundColor = 'lightgrey'}})
-        
-    
-    
+        if(item.style.backgroundColor == 'white') {
+            item.style.backgroundColor = 'yellow'}
+        else{item.style.backgroundColor = 'white'}})    
     delButton.addEventListener('click', ()=>{item.parentNode.removeChild(item)})
+
     item.appendChild(favButton)
     item.appendChild(delButton)
     return item
