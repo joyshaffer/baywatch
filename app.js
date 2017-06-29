@@ -3,6 +3,7 @@ const app = {
       this.flicks = []
     this.max = 0
     this.list = document.querySelector(selectors.listSelector)
+    this.template = document.querySelector(selectors.templateSelector)
 
     document
       .querySelector(selectors.formSelector)
@@ -13,59 +14,18 @@ const app = {
   },
 
   renderListItem(flick) {
-    const item = document.createElement('li')
+    const item = this.template.cloneNode(true)
+    item.classList.remove('template')
     item.dataset.id = flick.id
-    item.textContent = flick.name
-    item.style.backgroundColor = "white"
-
-    //create buttons
-    const favButton = document.createElement('button')
-    const delButton = document.createElement('button')
-    const upButton = document.createElement('button')
-    const downButton = document.createElement('button')
-    favButton.textContent = 'Fav'
-    delButton.textContent = 'Delete'
-    upButton.textContent = 'Up'
-    downButton.textContent = 'Down'
-
-    //style fav button
-    favButton.style.backgroundColor = 'dodgerblue'
-    favButton.style.position = 'absolute'
-    favButton.style.right = '400px'
-    favButton.style.height = '40px'
-    favButton.style.width = '60px'
-
-    //style del button
-    delButton.style.backgroundColor = 'red'
-    delButton.style.position = 'absolute'    
-    delButton.style.right = '340px'
-    delButton.style.height = '40px'
-    delButton.style.width = '60px'
-
-    //style up button
-    upButton.style.backgroundColor = 'Chartreuse'
-    upButton.style.position = 'absolute'    
-    upButton.style.right = '280px'
-    upButton.style.height = '40px'
-    upButton.style.width = '60px'
-
-    //style down button
-    downButton.style.backgroundColor = 'greenyellow'
-    downButton.style.position = 'absolute'    
-    downButton.style.right = '220px'
-    downButton.style.height = '40px'
-    downButton.style.width = '60px'
+    item
+        .querySelector('.flick-name')
+        .textContent = flick.name
 
     favButton.addEventListener('click', ()=>{
         if(item.style.backgroundColor == 'white') {
             item.style.backgroundColor = 'yellow'}
         else{item.style.backgroundColor = 'white'}})    
     delButton.addEventListener('click', ()=>{item.parentNode.removeChild(item)})
-
-    item.appendChild(favButton)
-    item.appendChild(delButton)
-    item.appendChild(upButton)
-    item.appendChild(downButton)
 
     return item
   },
@@ -96,4 +56,5 @@ const app = {
 app.init({
   formSelector: 'form#flick-form',
   listSelector: '#flick-list',
+  templateSelector: '.flick.template',
 })
