@@ -23,6 +23,19 @@ const app = {
     this.flicks.splice(i, 1)
   },
 
+  favFlick(flick,ev) {
+      const listItem = ev.target.closest('.flick')
+      flick.fav = !flick.fav
+
+      //flick.fav = listItem.classList.toggle('fav')
+      
+      if(flick.fav) {
+        listItem.classList.add('fav')
+      } else {
+        listItem.classList.remove('fav')
+      }
+  },
+  
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
     item.classList.remove('template')
@@ -36,10 +49,11 @@ const app = {
         .addEventListener('click',
          this.removeFlick.bind(this, flick))
 
-    favButton.addEventListener('click', ()=>{
-        if(item.style.backgroundColor == 'white') {
-            item.style.backgroundColor = 'yellow'}
-        else{item.style.backgroundColor = 'white'}})    
+    item
+        .querySelector('button.fav')
+        .addEventListener('click',
+
+        )
 
     return item
   },
@@ -50,6 +64,7 @@ const app = {
     const flick = {
       id: this.max + 1,
       name: f.flickName.value,
+      fav: false,
     }
     this.flicks.unshift(flick)
 
