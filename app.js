@@ -16,10 +16,10 @@ const app = {
   removeFlick(flick, ev) {
     //remove from the DOM
     const listItem = ev.target.closest('.flick')
-    listItem.remove
+    listItem.remove()
 
     //remove from the array
-    this.flicks.indexOf(flick)
+    const i = this.flicks.indexOf(flick)
     this.flicks.splice(i, 1)
   },
 
@@ -28,7 +28,7 @@ const app = {
       flick.fav = !flick.fav
 
       //flick.fav = listItem.classList.toggle('fav')
-      
+
       if(flick.fav) {
         listItem.classList.add('fav')
       } else {
@@ -47,12 +47,13 @@ const app = {
     item
         .querySelector('button.remove')
         .addEventListener('click',
-         this.removeFlick.bind(this, flick))
+         this.removeFlick.bind(this, flick)
+         )
 
     item
         .querySelector('button.fav')
         .addEventListener('click',
-
+        this.favFlick.bind(this, flick)
         )
 
     return item
@@ -74,7 +75,6 @@ const app = {
     //this.flicks[flick.id - 1] = flick.Name
     this.max ++
 
-    //resets the form--when you hit submit the text in the input goes away
     f.reset()
   }
 }
