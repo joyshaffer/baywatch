@@ -21,6 +21,8 @@ const app = {
     //remove from the array
     const i = this.flicks.indexOf(flick)
     this.flicks.splice(i, 1)
+
+    this.save()
   },
 
   favFlick(flick,ev) {
@@ -34,8 +36,46 @@ const app = {
       } else {
         listItem.classList.remove('fav')
       }
+
+      this.save()
   },
-  
+
+  moveUp(flick,ev) {
+    const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flickName.value]
+
+    const index = flickArr.findIndex((currentFlick, i) => {
+        return currentFlick.id === flick.id
+    })
+
+    if (index > 0) {
+      this.list[flickName.value].insertBefore(listItem, listItem.previousElementSibling)
+
+      const previousFlick = flickArr[index - 1]
+      flickArr[index - 1] = flick
+      flickArr[index] = previousFlick
+      this.save()
+    }
+  },
+
+  moveDown(flick, ev) {
+    const listItem = ev.target.closest('.flick')
+    const flickArr = this.flicks[flickName.value]
+
+    const index = flickArr.findIndex((currentFlick, i) => {
+        return currentFlick.id === flick.id
+    })
+
+    if (index < flickArr.length - 1) {
+      this.list[flickName.value].insertBefore(listItem.nextElementSibling, listItem)
+      
+      const nextFlick = flickArr[index + 1]
+      flickArr[index + 1] = flick
+      flickArr[index] =  nextFlick
+      this.save()
+    }
+  },
+
   renderListItem(flick) {
     const item = this.template.cloneNode(true)
     item.classList.remove('template')
@@ -46,16 +86,31 @@ const app = {
 
     item
         .querySelector('button.remove')
-        .addEventListener('click',
-         this.removeFlick.bind(this, flick)
+        .addEventListener(
+            'click',
+            this.removeFlick.bind(this, flick)
          )
 
     item
         .querySelector('button.fav')
-        .addEventListener('click',
-        this.favFlick.bind(this, flick)
+        .addEventListener(
+            'click',
+            this.favFlick.bind(this, flick)
         )
 
+    item
+        .querySelector('button.up')
+        .addEventListener(
+            'click',
+            this.moveUp.bind(this, flick)
+        )
+
+    item
+        .querySelector('button.down')
+        .addEventListener(
+            'click',
+            this.moveDown.bind(this, flick)
+        )
     return item
   },
 
@@ -78,9 +133,6 @@ const app = {
     f.reset()
   }
 }
-
-
-
 
 app.init({
   formSelector: 'form#flick-form',
